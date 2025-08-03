@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { 
   Calendar, 
-  Clock, 
-  User, 
+  UserPlus, 
+  Utensils, 
+  Globe, 
   Phone, 
   Mail, 
   MapPin, 
@@ -14,10 +15,8 @@ import {
   CheckCircle,
   ArrowRight,
   Stethoscope,
-  Activity,
-  MessageCircle
+  Activity
 } from 'lucide-react';
-import CommunicationPanel from '../components/CommunicationPanel';
 import { Screen } from '../App';
 
 interface HomeScreenProps {
@@ -25,40 +24,38 @@ interface HomeScreenProps {
 }
 
 const HomeScreen: React.FC<HomeScreenProps> = ({ onNavigate }) => {
-  const [showCommunication, setShowCommunication] = useState(false);
-
   const quickActions = [
     {
-      icon: Calendar,
-      title: 'Book Appointment',
-      description: 'Schedule your visit',
-      color: 'bg-blue-500',
-      hoverColor: 'hover:bg-blue-600',
-      action: () => window.open('https://dr-surendra-nehru-virtual-clinic-homa-surendramuddu.replit.app/', '_blank')
-    },
-    {
-      icon: User,
-      title: 'Patient Registration',
+      icon: UserPlus,
+      title: 'Register',
       description: 'New patient signup',
       color: 'bg-green-500',
       hoverColor: 'hover:bg-green-600',
-      action: () => onNavigate('register')
+      action: () => window.open(import.meta.env.VITE_REGISTER_URL, '_blank')
     },
     {
-      icon: MessageCircle,
-      title: 'Contact Doctor',
-      description: 'Chat, call or video',
+      icon: Utensils,
+      title: 'Diet Bot',
+      description: 'Nutrition guidance',
       color: 'bg-purple-500',
       hoverColor: 'hover:bg-purple-600',
-      action: () => setShowCommunication(true)
+      action: () => window.open(import.meta.env.VITE_DIET_BOT_URL, '_blank')
     },
     {
-      icon: Activity,
-      title: 'Health Tracker',
-      description: 'Monitor your health',
+      icon: Globe,
+      title: 'Website',
+      description: 'Visit our website',
+      color: 'bg-blue-500',
+      hoverColor: 'hover:bg-blue-600',
+      action: () => window.open(import.meta.env.VITE_MAIN_WEBSITE_URL, '_blank')
+    },
+    {
+      icon: Calendar,
+      title: 'Appointments',
+      description: 'Schedule your visit',
       color: 'bg-orange-500',
       hoverColor: 'hover:bg-orange-600',
-      action: () => onNavigate('diet')
+      action: () => onNavigate('followup')
     }
   ];
 
@@ -105,23 +102,21 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ onNavigate }) => {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
-              <a
-                href="https://dr-surendra-nehru-virtual-clinic-homa-surendramuddu.replit.app/"
-                target="_blank"
-                rel="noopener noreferrer"
+              <button
+                onClick={() => onNavigate('payments')}
                 className="inline-flex items-center space-x-3 bg-white text-blue-600 px-8 py-4 rounded-xl text-lg font-semibold hover:bg-blue-50 transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl"
               >
                 <Calendar className="h-6 w-6" />
                 <span>📅 BOOK APPOINTMENT NOW</span>
-              </a>
+              </button>
               
-              <button
-                onClick={() => setShowCommunication(true)}
+              <a
+                href="tel:+919963721999"
                 className="inline-flex items-center space-x-3 bg-transparent border-2 border-white text-white px-8 py-4 rounded-xl text-lg font-semibold hover:bg-white hover:text-blue-600 transition-all duration-200"
               >
                 <Phone className="h-6 w-6" />
                 <span>Emergency Contact</span>
-              </button>
+              </a>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
@@ -136,7 +131,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ onNavigate }) => {
                 <p className="text-sm text-blue-100">Professional excellence</p>
               </div>
               <div className="bg-white bg-opacity-20 rounded-lg p-6 backdrop-blur-sm">
-                <Clock className="h-8 w-8 mb-3 mx-auto" />
+                <Phone className="h-8 w-8 mb-3 mx-auto" />
                 <h3 className="font-semibold mb-2">24/7 Support</h3>
                 <p className="text-sm text-blue-100">Always here for you</p>
               </div>
@@ -181,7 +176,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ onNavigate }) => {
               <h3 className="text-xl font-semibold text-gray-900 mb-3">General Consultation</h3>
               <p className="text-gray-600 mb-4">Comprehensive health checkups and medical consultations</p>
               <button 
-                onClick={() => window.open('https://dr-surendra-nehru-virtual-clinic-homa-surendramuddu.replit.app/', '_blank')}
+                onClick={() => onNavigate('payments')}
                 className="text-blue-600 font-medium hover:text-blue-700 flex items-center space-x-1"
               >
                 <span>Book Now</span>
@@ -194,7 +189,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ onNavigate }) => {
               <h3 className="text-xl font-semibold text-gray-900 mb-3">Preventive Care</h3>
               <p className="text-gray-600 mb-4">Regular health screenings and preventive medicine</p>
               <button 
-                onClick={() => window.open('https://dr-surendra-nehru-virtual-clinic-homa-surendramuddu.replit.app/', '_blank')}
+                onClick={() => onNavigate('followup')}
                 className="text-green-600 font-medium hover:text-green-700 flex items-center space-x-1"
               >
                 <span>Learn More</span>
@@ -265,7 +260,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ onNavigate }) => {
                 </div>
                 <div className="flex items-center space-x-3">
                   <Phone className="h-6 w-6 text-blue-200" />
-                  <span className="text-blue-100">+91 98765 43210</span>
+                  <span className="text-blue-100">+91 99637 21999</span>
                 </div>
                 <div className="flex items-center space-x-3">
                   <Mail className="h-6 w-6 text-blue-200" />
@@ -277,26 +272,24 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ onNavigate }) => {
             <div className="bg-white bg-opacity-10 backdrop-blur-sm rounded-xl p-8">
               <h3 className="text-2xl font-semibold mb-6">Book Your Appointment</h3>
               <div className="space-y-4">
-                <a
-                  href="https://dr-surendra-nehru-virtual-clinic-homa-surendramuddu.replit.app/"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <button
+                  onClick={() => onNavigate('payments')}
                   className="w-full bg-white text-blue-600 py-4 px-6 rounded-lg font-semibold hover:bg-blue-50 transition-colors flex items-center justify-center space-x-2"
                 >
                   <Calendar className="h-5 w-5" />
                   <span>Book Online Appointment</span>
-                </a>
-                
-                <button
-                  onClick={() => setShowCommunication(true)}
-                  className="w-full bg-transparent border-2 border-white text-white py-4 px-6 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition-colors flex items-center justify-center space-x-2"
-                >
-                  <MessageCircle className="h-5 w-5" />
-                  <span>Chat with Doctor</span>
                 </button>
                 
                 <a
-                  href="https://www.homahealthcarecenter.in"
+                  href="tel:+919963721999"
+                  className="w-full bg-transparent border-2 border-white text-white py-4 px-6 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition-colors flex items-center justify-center space-x-2"
+                >
+                  <Phone className="h-5 w-5" />
+                  <span>Call Now</span>
+                </a>
+                
+                <a
+                  href={import.meta.env.VITE_MAIN_WEBSITE_URL}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full bg-green-500 text-white py-4 px-6 rounded-lg font-semibold hover:bg-green-600 transition-colors flex items-center justify-center space-x-2"
@@ -309,12 +302,6 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ onNavigate }) => {
           </div>
         </div>
       </div>
-
-      {/* Communication Panel */}
-      <CommunicationPanel 
-        isOpen={showCommunication}
-        onClose={() => setShowCommunication(false)}
-      />
     </div>
   );
 };

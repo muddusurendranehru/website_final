@@ -1,317 +1,293 @@
 import React, { useState } from 'react';
 import { 
-  Play, 
-  Image, 
-  Upload, 
   Calendar, 
-  Eye,
-  Heart,
-  Share,
-  Download,
-  ExternalLink
+  Clock, 
+  User, 
+  Phone,
+  CheckCircle,
+  AlertCircle,
+  Plus,
+  ExternalLink,
+  Stethoscope,
+  MapPin
 } from 'lucide-react';
 
-interface Video {
+interface Appointment {
   id: number;
-  title: string;
-  description: string;
-  thumbnail: string;
-  duration: string;
-  uploadDate: string;
-  views: number;
-  category: string;
-  youtubeId?: string;
+  date: string;
+  time: string;
+  doctor: string;
+  type: string;
+  status: 'upcoming' | 'completed' | 'cancelled';
+  notes?: string;
 }
 
-interface ImageGalleryItem {
-  id: number;
-  title: string;
-  description: string;
-  imageUrl: string;
-  uploadDate: string;
-  category: string;
-}
-
-const MediaScreen: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<'videos' | 'images'>('videos');
-
-  // YouTube Channel: https://www.youtube.com/channel/UCf8avHrw6K07POXSIoKgHwg
-  // These are sample videos - replace with actual YouTube API integration
-  const videos: Video[] = [
+const FollowUpScreen: React.FC = () => {
+  const [appointments, setAppointments] = useState<Appointment[]>([
     {
       id: 1,
-      title: 'Homa Healthcare - Complete Health Checkup Guide',
-      description: 'Learn about our comprehensive health screening services and what to expect during your visit.',
-      thumbnail: 'https://images.pexels.com/photos/6823568/pexels-photo-6823568.jpeg?auto=compress&cs=tinysrgb&w=500',
-      duration: '8:45',
-      uploadDate: '2024-01-15',
-      views: 2340,
-      category: 'Health Education',
-      youtubeId: 'UCf8avHrw6K07POXSIoKgHwg' // From your channel
+      date: '2024-01-25',
+      time: '10:00 AM',
+      doctor: 'Dr. Surendra Nehru',
+      type: 'Follow-up Consultation',
+      status: 'upcoming',
+      notes: 'Blood pressure check and medication review'
     },
     {
       id: 2,
-      title: 'Patient Care Excellence at Homa Healthcare Center',
-      description: 'Discover our patient-centered approach and the quality care we provide to every individual.',
-      thumbnail: 'https://images.pexels.com/photos/3822647/pexels-photo-3822647.jpeg?auto=compress&cs=tinysrgb&w=500',
-      duration: '6:20',
-      uploadDate: '2024-01-10',
-      views: 1890,
-      category: 'Patient Care',
-      youtubeId: 'UCf8avHrw6K07POXSIoKgHwg'
+      date: '2024-01-20',
+      time: '2:30 PM',
+      doctor: 'Dr. Surendra Nehru',
+      type: 'General Consultation',
+      status: 'completed',
+      notes: 'Initial consultation completed successfully'
     },
     {
       id: 3,
-      title: 'Modern Medical Equipment & Technology Tour',
-      description: 'Take a virtual tour of our state-of-the-art medical facilities and advanced diagnostic equipment.',
-      thumbnail: 'https://images.pexels.com/photos/3760514/pexels-photo-3760514.jpeg?auto=compress&cs=tinysrgb&w=500',
-      duration: '10:15',
-      uploadDate: '2024-01-05',
-      views: 3200,
-      category: 'Facilities',
-      youtubeId: 'UCf8avHrw6K07POXSIoKgHwg'
+      date: '2024-01-30',
+      time: '11:15 AM',
+      doctor: 'Dr. Surendra Nehru',
+      type: 'Health Checkup',
+      status: 'upcoming',
+      notes: 'Annual health screening'
+    }
+  ]);
+
+  const bookAppointment = () => {
+    // This would typically open a booking form or redirect to booking system
+    alert('Appointment booking feature will be integrated with the main booking system');
+  };
+
+  const upcomingAppointments = appointments.filter(apt => apt.status === 'upcoming');
+  const completedAppointments = appointments.filter(apt => apt.status === 'completed');
+
+  const appointmentTypes = [
+    {
+      name: 'Follow-up Visit',
+      duration: '15-20 minutes',
+      price: '₹300',
+      description: 'Review progress and adjust treatment plan'
     },
     {
-      id: 4,
-      title: 'Preventive Healthcare: Annual Health Screening',
-      description: 'Understanding the importance of regular health checkups and preventive care measures.',
-      thumbnail: 'https://images.pexels.com/photos/4386466/pexels-photo-4386466.jpeg?auto=compress&cs=tinysrgb&w=500',
-      duration: '7:30',
-      uploadDate: '2024-01-01',
-      views: 1560,
-      category: 'Prevention',
+      name: 'General Consultation',
+      duration: '30 minutes',
+      price: '₹500',
+      description: 'Comprehensive health consultation'
+    },
+    {
+      name: 'Health Checkup',
+      duration: '45 minutes',
+      price: '₹800',
+      description: 'Complete health screening and tests'
     }
   ];
-
-  const images: ImageGalleryItem[] = [
-    {
-      id: 1,
-      title: 'Proper Hand Washing Technique',
-      description: 'Step-by-step guide for effective hand hygiene',
-      imageUrl: 'https://images.pexels.com/photos/4386466/pexels-photo-4386466.jpeg?auto=compress&cs=tinysrgb&w=500',
-      uploadDate: '2024-01-12',
-      category: 'Hygiene'
-    },
-    {
-      id: 2,
-      title: 'Healthy Meal Planning Chart',
-      description: 'Visual guide to balanced nutrition and portion control',
-      imageUrl: 'https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=500',
-      uploadDate: '2024-01-08',
-      category: 'Nutrition'
-    },
-    {
-      id: 3,
-      title: 'Exercise Routines for Seniors',
-      description: 'Safe and effective exercises for older adults',
-      imageUrl: 'https://images.pexels.com/photos/6975459/pexels-photo-6975459.jpeg?auto=compress&cs=tinysrgb&w=500',
-      uploadDate: '2024-01-03',
-      category: 'Fitness'
-    }
-  ];
-
-  const categories = ['All', 'Health Education', 'Wellness', 'Mental Health', 'Nutrition', 'Fitness', 'Hygiene'];
-  const [selectedCategory, setSelectedCategory] = useState('All');
-
-  const filteredVideos = selectedCategory === 'All' 
-    ? videos 
-    : videos.filter(video => video.category === selectedCategory);
-
-  const filteredImages = selectedCategory === 'All' 
-    ? images 
-    : images.filter(image => image.category === selectedCategory);
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-6">
+    <div className="max-w-4xl mx-auto px-4 py-6">
       {/* Header */}
       <div className="text-center mb-8">
-        <h1 className="text-2xl font-bold text-gray-900 mb-2">Health Media Center</h1>
+        <h1 className="text-2xl font-bold text-gray-900 mb-2">Follow-up & Appointments</h1>
         <p className="text-gray-600">
-          Educational videos and resources to support your health journey
+          Manage your appointments and schedule follow-up visits
         </p>
       </div>
 
-      {/* Tab Navigation */}
-      <div className="flex space-x-1 mb-6 bg-gray-100 rounded-lg p-1">
+      {/* Quick Actions */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
         <button
-          onClick={() => setActiveTab('videos')}
-          className={`flex-1 flex items-center justify-center space-x-2 py-3 px-4 rounded-md transition-all ${
-            activeTab === 'videos'
-              ? 'bg-white shadow-sm text-gray-900'
-              : 'text-gray-600 hover:text-gray-900'
-          }`}
+          onClick={bookAppointment}
+          className="bg-gradient-to-r from-blue-500 to-green-500 text-white p-6 rounded-xl hover:from-blue-600 hover:to-green-600 transition-all duration-200 flex items-center space-x-4"
         >
-          <Play className="h-5 w-5" />
-          <span className="font-medium">Videos</span>
+          <div className="bg-white bg-opacity-20 p-3 rounded-lg">
+            <Plus className="h-8 w-8" />
+          </div>
+          <div className="text-left">
+            <h3 className="text-lg font-semibold">Book New Appointment</h3>
+            <p className="text-blue-100">Schedule your next visit</p>
+          </div>
         </button>
-        <button
-          onClick={() => setActiveTab('images')}
-          className={`flex-1 flex items-center justify-center space-x-2 py-3 px-4 rounded-md transition-all ${
-            activeTab === 'images'
-              ? 'bg-white shadow-sm text-gray-900'
-              : 'text-gray-600 hover:text-gray-900'
-          }`}
+
+        <a
+          href="tel:+919963721999"
+          className="bg-white border-2 border-blue-500 text-blue-600 p-6 rounded-xl hover:bg-blue-50 transition-colors flex items-center space-x-4"
         >
-          <Image className="h-5 w-5" />
-          <span className="font-medium">Images</span>
-        </button>
+          <div className="bg-blue-100 p-3 rounded-lg">
+            <Phone className="h-8 w-8 text-blue-600" />
+          </div>
+          <div className="text-left">
+            <h3 className="text-lg font-semibold">Call Clinic</h3>
+            <p className="text-blue-500">+91 99637 21999</p>
+          </div>
+        </a>
       </div>
 
-      {/* Category Filter */}
-      <div className="mb-6">
-        <div className="flex flex-wrap gap-2">
-          {categories.map((category) => (
+      {/* Upcoming Appointments */}
+      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
+        <div className="flex items-center justify-between mb-6">
+          <h2 className="text-lg font-semibold text-gray-900">Upcoming Appointments</h2>
+          <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">
+            {upcomingAppointments.length} scheduled
+          </span>
+        </div>
+
+        {upcomingAppointments.length > 0 ? (
+          <div className="space-y-4">
+            {upcomingAppointments.map((appointment) => (
+              <div key={appointment.id} className="border border-gray-200 rounded-lg p-4 hover:shadow-sm transition-shadow">
+                <div className="flex items-start justify-between mb-3">
+                  <div className="flex items-start space-x-4">
+                    <div className="bg-blue-100 p-2 rounded-lg">
+                      <Calendar className="h-5 w-5 text-blue-600" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-gray-900">{appointment.type}</h3>
+                      <div className="flex items-center space-x-4 text-sm text-gray-600 mt-1">
+                        <div className="flex items-center space-x-1">
+                          <Calendar className="h-4 w-4" />
+                          <span>{new Date(appointment.date).toLocaleDateString()}</span>
+                        </div>
+                        <div className="flex items-center space-x-1">
+                          <Clock className="h-4 w-4" />
+                          <span>{appointment.time}</span>
+                        </div>
+                        <div className="flex items-center space-x-1">
+                          <User className="h-4 w-4" />
+                          <span>{appointment.doctor}</span>
+                        </div>
+                      </div>
+                      {appointment.notes && (
+                        <p className="text-sm text-blue-600 mt-2">📝 {appointment.notes}</p>
+                      )}
+                    </div>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <span className="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs font-medium">
+                      Confirmed
+                    </span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="text-center py-8">
+            <Calendar className="h-12 w-12 text-gray-400 mx-auto mb-4" />
+            <h3 className="text-lg font-medium text-gray-900 mb-2">No upcoming appointments</h3>
+            <p className="text-gray-600 mb-4">Schedule your next visit with Dr. Nehru</p>
             <button
-              key={category}
-              onClick={() => setSelectedCategory(category)}
-              className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-                selectedCategory === category
-                  ? 'bg-blue-500 text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-              }`}
+              onClick={bookAppointment}
+              className="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition-colors"
             >
-              {category}
+              Book Appointment
             </button>
+          </div>
+        )}
+      </div>
+
+      {/* Appointment Types */}
+      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
+        <h2 className="text-lg font-semibold text-gray-900 mb-6">Available Appointment Types</h2>
+        
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {appointmentTypes.map((type, index) => (
+            <div key={index} className="border border-gray-200 rounded-lg p-4 hover:shadow-sm transition-shadow">
+              <div className="flex items-center justify-between mb-3">
+                <h3 className="font-medium text-gray-900">{type.name}</h3>
+                <span className="text-lg font-bold text-blue-600">{type.price}</span>
+              </div>
+              <p className="text-sm text-gray-600 mb-2">{type.description}</p>
+              <div className="flex items-center space-x-1 text-xs text-gray-500">
+                <Clock className="h-3 w-3" />
+                <span>{type.duration}</span>
+              </div>
+            </div>
           ))}
         </div>
       </div>
 
-      {/* Content */}
-      {activeTab === 'videos' ? (
-        <div>
-          {/* Videos Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-            {filteredVideos.map((video) => (
-              <div key={video.id} className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
-                <div className="relative">
-                  <img
-                    src={video.thumbnail}
-                    alt={video.title}
-                    className="w-full h-48 object-cover"
-                  />
-                  <div className="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
-                    <button className="bg-white bg-opacity-90 p-3 rounded-full hover:bg-opacity-100 transition-colors">
-                      <Play className="h-6 w-6 text-gray-900" />
-                    </button>
-                  </div>
-                  <div className="absolute bottom-2 right-2 bg-black bg-opacity-70 text-white text-xs px-2 py-1 rounded">
-                    {video.duration}
-                  </div>
-                </div>
-                
-                <div className="p-4">
-                  <h3 className="font-semibold text-gray-900 mb-2 line-clamp-2">
-                    {video.title}
-                  </h3>
-                  <p className="text-sm text-gray-600 mb-3 line-clamp-2">
-                    {video.description}
-                  </p>
-                  
-                  <div className="flex items-center justify-between text-xs text-gray-500 mb-3">
-                    <span>{new Date(video.uploadDate).toLocaleDateString()}</span>
-                    <div className="flex items-center space-x-1">
-                      <Eye className="h-3 w-3" />
-                      <span>{video.views.toLocaleString()} views</span>
+      {/* Recent Appointments */}
+      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
+        <h2 className="text-lg font-semibold text-gray-900 mb-6">Recent Appointments</h2>
+        
+        {completedAppointments.length > 0 ? (
+          <div className="space-y-4">
+            {completedAppointments.map((appointment) => (
+              <div key={appointment.id} className="border border-gray-200 rounded-lg p-4 bg-gray-50">
+                <div className="flex items-start justify-between">
+                  <div className="flex items-start space-x-4">
+                    <div className="bg-green-100 p-2 rounded-lg">
+                      <CheckCircle className="h-5 w-5 text-green-600" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-gray-900">{appointment.type}</h3>
+                      <div className="flex items-center space-x-4 text-sm text-gray-600 mt-1">
+                        <span>{new Date(appointment.date).toLocaleDateString()}</span>
+                        <span>{appointment.time}</span>
+                        <span>{appointment.doctor}</span>
+                      </div>
+                      {appointment.notes && (
+                        <p className="text-sm text-gray-600 mt-2">{appointment.notes}</p>
+                      )}
                     </div>
                   </div>
-                  
-                  <div className="flex items-center justify-between">
-                    <span className="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">
-                      {video.category}
-                    </span>
-                    <div className="flex items-center space-x-2">
-                      <button className="p-1 text-gray-400 hover:text-red-500 transition-colors">
-                        <Heart className="h-4 w-4" />
-                      </button>
-                      <button className="p-1 text-gray-400 hover:text-blue-500 transition-colors">
-                        <Share className="h-4 w-4" />
-                      </button>
-                      <button className="p-1 text-gray-400 hover:text-gray-600 transition-colors">
-                        <ExternalLink className="h-4 w-4" />
-                      </button>
-                    </div>
-                  </div>
+                  <span className="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs font-medium">
+                    Completed
+                  </span>
                 </div>
               </div>
             ))}
           </div>
+        ) : (
+          <p className="text-gray-600 text-center py-4">No recent appointments</p>
+        )}
+      </div>
 
-          {/* YouTube Integration Note */}
-          <div className="bg-red-50 border border-red-200 rounded-lg p-4">
-            <h3 className="text-sm font-medium text-red-900 mb-2">YouTube Integration</h3>
-            <p className="text-sm text-red-700">
-              <strong>Developer Note:</strong> This section will automatically fetch the latest videos from your clinic's YouTube channel. 
-              Configure the YouTube API integration with channel ID: <code className="bg-red-200 px-1 rounded">[YOUR_YOUTUBE_CHANNEL_ID]</code>
-            </p>
-          </div>
-        </div>
-      ) : (
-        <div>
-          {/* Images Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-            {filteredImages.map((image) => (
-              <div key={image.id} className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
-                <div className="relative">
-                  <img
-                    src={image.imageUrl}
-                    alt={image.title}
-                    className="w-full h-48 object-cover"
-                  />
-                  <div className="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
-                    <button className="bg-white bg-opacity-90 p-3 rounded-full hover:bg-opacity-100 transition-colors">
-                      <Eye className="h-6 w-6 text-gray-900" />
-                    </button>
-                  </div>
-                </div>
-                
-                <div className="p-4">
-                  <h3 className="font-semibold text-gray-900 mb-2">
-                    {image.title}
-                  </h3>
-                  <p className="text-sm text-gray-600 mb-3">
-                    {image.description}
-                  </p>
-                  
-                  <div className="flex items-center justify-between text-xs text-gray-500 mb-3">
-                    <span>{new Date(image.uploadDate).toLocaleDateString()}</span>
-                  </div>
-                  
-                  <div className="flex items-center justify-between">
-                    <span className="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">
-                      {image.category}
-                    </span>
-                    <div className="flex items-center space-x-2">
-                      <button className="p-1 text-gray-400 hover:text-blue-500 transition-colors">
-                        <Download className="h-4 w-4" />
-                      </button>
-                      <button className="p-1 text-gray-400 hover:text-blue-500 transition-colors">
-                        <Share className="h-4 w-4" />
-                      </button>
-                    </div>
-                  </div>
-                </div>
+      {/* Clinic Information */}
+      <div className="bg-blue-50 rounded-xl border border-blue-200 p-6">
+        <h2 className="text-lg font-semibold text-gray-900 mb-4">Clinic Information</h2>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <h3 className="font-medium text-gray-900 mb-3">Contact Details</h3>
+            <div className="space-y-2">
+              <div className="flex items-center space-x-2">
+                <Phone className="h-4 w-4 text-blue-600" />
+                <a href="tel:+919963721999" className="text-sm text-blue-600 hover:underline">
+                  +91 99637 21999
+                </a>
               </div>
-            ))}
+              <div className="flex items-center space-x-2">
+                <MapPin className="h-4 w-4 text-blue-600" />
+                <span className="text-sm text-gray-600">Hyderabad, Telangana</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <Stethoscope className="h-4 w-4 text-blue-600" />
+                <span className="text-sm text-gray-600">Dr. Surendra Nehru - APCOG Certified</span>
+              </div>
+            </div>
           </div>
-
-          {/* Upload Section */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-            <h2 className="text-lg font-semibold text-gray-900 mb-4">Upload New Content</h2>
-            <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-gray-400 transition-colors">
-              <Upload className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-              <h3 className="text-lg font-medium text-gray-900 mb-2">Upload Images or Videos</h3>
-              <p className="text-gray-600 mb-4">
-                Add educational content to help patients learn about health topics
-              </p>
-              <button className="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition-colors">
-                Choose Files
-              </button>
+          
+          <div>
+            <h3 className="font-medium text-gray-900 mb-3">Clinic Hours</h3>
+            <div className="space-y-1 text-sm text-gray-600">
+              <div className="flex justify-between">
+                <span>Monday - Friday:</span>
+                <span>9:00 AM - 6:00 PM</span>
+              </div>
+              <div className="flex justify-between">
+                <span>Saturday:</span>
+                <span>9:00 AM - 2:00 PM</span>
+              </div>
+              <div className="flex justify-between">
+                <span>Sunday:</span>
+                <span>Emergency Only</span>
+              </div>
             </div>
           </div>
         </div>
-      )}
+      </div>
     </div>
   );
 };
 
-export default MediaScreen;
+export default FollowUpScreen;

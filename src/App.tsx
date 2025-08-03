@@ -7,20 +7,15 @@ import {
   Pill, 
   Calendar, 
   Play, 
-  Globe,
-  Menu,
-  X,
-  Shield,
-  Heart,
-  CheckCircle
+  Globe
 } from 'lucide-react';
 import Header from './components/Header';
 import BottomNavigation from './components/BottomNavigation';
 import HomeScreen from './screens/HomeScreen';
-import RegistrationScreen from './screens/RegistrationScreen';
-import PaymentsScreen from './screens/PaymentsScreen';
+import RegisterScreen from './screens/RegisterScreen';
+import PaymentScreen from './screens/PaymentScreen';
 import DietScreen from './screens/DietScreen';
-import MedicinesScreen from './screens/MedicinesScreen';
+import MedicineScreen from './screens/MedicineScreen';
 import FollowUpScreen from './screens/FollowUpScreen';
 import MediaScreen from './screens/MediaScreen';
 import WebsiteScreen from './screens/WebsiteScreen';
@@ -35,13 +30,13 @@ function App() {
       case 'home':
         return <HomeScreen onNavigate={setCurrentScreen} />;
       case 'register':
-        return <RegistrationScreen />;
+        return <RegisterScreen />;
       case 'payments':
-        return <PaymentsScreen />;
+        return <PaymentScreen />;
       case 'diet':
         return <DietScreen />;
       case 'medicines':
-        return <MedicinesScreen />;
+        return <MedicineScreen />;
       case 'followup':
         return <FollowUpScreen />;
       case 'media':
