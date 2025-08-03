@@ -25,7 +25,7 @@ const MediaScreen: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const channelId = import.meta.env.VITE_YOUTUBE_CHANNEL_ID;
+  const channelId = import.meta.env.VITE_YOUTUBE_CHANNEL_ID || 'UCf8avHrw6K07POXSIoKgHwg';
   const apiKey = import.meta.env.VITE_YOUTUBE_API_KEY;
 
   useEffect(() => {
