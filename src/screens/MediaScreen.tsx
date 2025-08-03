@@ -7,18 +7,11 @@ import {
   ExternalLink,
   Youtube,
   Users,
-  Calendar
+  Calendar,
+  AlertCircle,
+  RefreshCw
 } from 'lucide-react';
-
-interface YouTubeVideo {
-  id: string;
-  title: string;
-  description: string;
-  thumbnail: string;
-  publishedAt: string;
-  viewCount: string;
-  duration: string;
-}
+import { youtubeApi, YouTubeVideo } from '../services/youtubeApi';
 
 const MediaScreen: React.FC = () => {
   const [videos, setVideos] = useState<YouTubeVideo[]>([]);
@@ -26,70 +19,18 @@ const MediaScreen: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
 
   const channelId = import.meta.env.VITE_YOUTUBE_CHANNEL_ID || 'UCf8avHrw6K07POXSIoKgHwg';
-  const apiKey = import.meta.env.VITE_YOUTUBE_API_KEY;
 
   useEffect(() => {
     fetchChannelVideos();
   }, []);
 
   const fetchChannelVideos = async () => {
-    if (!apiKey || !channelId) {
-      setError('YouTube API configuration missing');
-      setLoading(false);
-      return;
-    }
-
+    setLoading(true);
+    setError(null);
+    
     try {
-      // First get the channel's uploads playlist
-      const channelResponse = await fetch(
-        `https://www.googleapis.com/youtube/v3/channels?part=contentDetails&id=${channelId}&key=${apiKey}`
-      );
-      
-      if (!channelResponse.ok) {
-        throw new Error('Failed to fetch channel data');
-      }
-
-      const channelData = await channelResponse.json();
-      const uploadsPlaylistId = channelData.items[0]?.contentDetails?.relatedPlaylists?.uploads;
-
-      if (!uploadsPlaylistId) {
-        throw new Error('Could not find uploads playlist');
-      }
-
-      // Get videos from uploads playlist
-      const playlistResponse = await fetch(
-        `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${uploadsPlaylistId}&maxResults=12&key=${apiKey}`
-      );
-
-      if (!playlistResponse.ok) {
-        throw new Error('Failed to fetch playlist items');
-      }
-
-      const playlistData = await playlistResponse.json();
-      const videoIds = playlistData.items.map((item: any) => item.snippet.resourceId.videoId).join(',');
-
-      // Get detailed video information
-      const videosResponse = await fetch(
-        `https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics,contentDetails&id=${videoIds}&key=${apiKey}`
-      );
-
-      if (!videosResponse.ok) {
-        throw new Error('Failed to fetch video details');
-      }
-
-      const videosData = await videosResponse.json();
-
-      const formattedVideos = videosData.items.map((video: any) => ({
-        id: video.id,
-        title: video.snippet.title,
-        description: video.snippet.description,
-        thumbnail: video.snippet.thumbnails.medium?.url || video.snippet.thumbnails.default?.url,
-        publishedAt: video.snippet.publishedAt,
-        viewCount: video.statistics.viewCount || '0',
-        duration: parseDuration(video.contentDetails.duration)
-      }));
-
-      setVideos(formattedVideos);
+      const fetchedVideos = await youtubeApi.getChannelVideos(12);
+      setVideos(fetchedVideos);
     } catch (err) {
       console.error('Error fetching YouTube videos:', err);
       setError(err instanceof Error ? err.message : 'Failed to load videos');
@@ -98,22 +39,13 @@ const MediaScreen: React.FC = () => {
     }
   };
 
-  const parseDuration = (duration: string): string => {
-    const match = duration.match(/PT(\d+H)?(\d+M)?(\d+S)?/);
-    if (!match) return '0:00';
-
-    const hours = parseInt(match[1]?.replace('H', '') || '0');
-    const minutes = parseInt(match[2]?.replace('M', '') || '0');
-    const seconds = parseInt(match[3]?.replace('S', '') || '0');
-
-    if (hours > 0) {
-      return `${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-    }
-    return `${minutes}:${seconds.toString().padStart(2, '0')}`;
-  };
-
   const openVideo = (videoId: string) => {
-    window.open(`https://www.youtube.com/watch?v=${videoId}`, '_blank');
+    if (videoId.startsWith('fallback')) {
+      // For fallback videos, open the channel instead
+      window.open(`https://www.youtube.com/channel/${channelId}`, '_blank');
+    } else {
+      window.open(`https://www.youtube.com/watch?v=${videoId}`, '_blank');
+    }
   };
 
   const subscribeToChannel = () => {
@@ -131,25 +63,6 @@ const MediaScreen: React.FC = () => {
     );
   }
 
-  if (error) {
-    return (
-      <div className="max-w-6xl mx-auto px-4 py-6">
-        <div className="text-center">
-          <div className="bg-red-50 border border-red-200 rounded-lg p-6">
-            <h2 className="text-lg font-semibold text-red-900 mb-2">Error Loading Videos</h2>
-            <p className="text-red-700">{error}</p>
-            <button
-              onClick={fetchChannelVideos}
-              className="mt-4 bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition-colors"
-            >
-              Try Again
-            </button>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div className="max-w-6xl mx-auto px-4 py-6">
       {/* Header */}
@@ -159,6 +72,27 @@ const MediaScreen: React.FC = () => {
           Educational videos and resources from Homa Healthcare Center
         </p>
       </div>
+
+      {/* Error Message */}
+      {error && (
+        <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-6">
+          <div className="flex items-center space-x-2">
+            <AlertCircle className="h-5 w-5 text-yellow-600" />
+            <div>
+              <h3 className="font-medium text-yellow-900">YouTube API Notice</h3>
+              <p className="text-sm text-yellow-700">
+                Showing sample content. Real videos will load when API is configured.
+              </p>
+            </div>
+            <button
+              onClick={fetchChannelVideos}
+              className="ml-auto p-2 text-yellow-600 hover:text-yellow-700"
+            >
+              <RefreshCw className="h-4 w-4" />
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* Channel Info */}
       <div className="bg-gradient-to-r from-red-500 to-red-600 text-white rounded-xl p-6 mb-8">
@@ -250,7 +184,13 @@ const MediaScreen: React.FC = () => {
         <div className="text-center py-12">
           <Youtube className="h-16 w-16 text-gray-400 mx-auto mb-4" />
           <h3 className="text-lg font-medium text-gray-900 mb-2">No videos found</h3>
-          <p className="text-gray-600">Check back later for new content!</p>
+          <p className="text-gray-600 mb-4">Check back later for new content!</p>
+          <button
+            onClick={fetchChannelVideos}
+            className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors"
+          >
+            Retry Loading
+          </button>
         </div>
       )}
 
@@ -271,7 +211,7 @@ const MediaScreen: React.FC = () => {
               <span>Subscribe to Channel</span>
             </button>
             <a
-              href={import.meta.env.VITE_MAIN_WEBSITE_URL}
+              href="https://www.homahealthcarecenter.in"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center space-x-2 bg-gradient-to-r from-blue-500 to-green-500 text-white px-6 py-3 rounded-lg hover:from-blue-600 hover:to-green-600 transition-all duration-200 font-medium"
