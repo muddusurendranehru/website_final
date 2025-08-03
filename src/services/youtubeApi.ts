@@ -38,7 +38,7 @@ class YouTubeApiService {
 
   async getChannelVideos(maxResults: number = 10): Promise<YouTubeVideo[]> {
     if (!this.apiKey) {
-      console.error('YouTube API key is required');
+      console.error('YouTube API key is required. Please check your .env file and ensure VITE_YOUTUBE_API_KEY is set.');
       return this.getFallbackVideos();
     }
 
@@ -49,6 +49,10 @@ class YouTubeApiService {
       );
       
       if (!channelResponse.ok) {
+        if (channelResponse.status === 403) {
+          console.error('YouTube API 403 Error: API key may be invalid, expired, or YouTube Data API v3 is not enabled for this project.');
+          console.error('Please verify your API key and ensure YouTube Data API v3 is enabled in Google Cloud Console.');
+        }
         throw new Error(`Channel API error: ${channelResponse.status}`);
       }
 
