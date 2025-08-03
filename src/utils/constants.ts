@@ -11,7 +11,7 @@ export const APP_CONFIG = {
 
 export const EXTERNAL_SERVICES = {
   virtualClinic: import.meta.env.VITE_VIRTUAL_CLINIC_URL || 'https://dr-surendra-nehru-virtual-clinic-homa-surendramuddu.replit.app/',
-  nutritionBot: import.meta.env.VITE_NUTRITION_BOT_URL || 'https://nutrition-bot-homa-surendramuddu.replit.app/',
+  nutritionBot: import.meta.env.VITE_DIET_BOT_URL || 'https://dynamic-mermaid-2ff7e0.netlify.app/',
   mainWebsite: import.meta.env.VITE_MAIN_WEBSITE_URL || 'https://www.homahealthcarecenter.in',
   youtubeChannel: import.meta.env.VITE_YOUTUBE_CHANNEL_ID || 'UCf8avHrw6K07POXSIoKgHwg'
 };

@@ -39,7 +39,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ onNavigate }) => {
       description: 'Nutrition guidance',
       color: 'bg-purple-500',
       hoverColor: 'hover:bg-purple-600',
-      action: () => window.open(import.meta.env.VITE_DIET_BOT_URL, '_blank')
+      action: () => window.open('https://dynamic-mermaid-2ff7e0.netlify.app/', '_blank')
     },
     {
       icon: Globe,

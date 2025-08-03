@@ -14,7 +14,8 @@ import {
 
 const DietScreen: React.FC = () => {
   const openDietBot = () => {
-    window.open(import.meta.env.VITE_DIET_BOT_URL, '_blank');
+    // Use the working diet bot URL
+    window.open('https://dynamic-mermaid-2ff7e0.netlify.app/', '_blank');
   };
 
   const nutritionTips = [
