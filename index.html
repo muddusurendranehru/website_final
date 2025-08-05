@@ -4,7 +4,103 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Homa Healthcare Center Web App</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Homa Healthcare Center - Dr. Muddu Surendra Nehru MD, APCOG Certified Diabetes & Obesity Specialist in Hyderabad. 15+ years experience, 5000+ patients treated. Book appointment: +91-9963721999" />
+    <meta name="keywords" content="diabetes doctor hyderabad, obesity treatment hyderabad, women health specialist, TSMC 20548 certified doctor, Dr Nehru diabetes specialist, healthcare center hyderabad" />
+    <meta name="author" content="Dr. Muddu Surendra Nehru MD" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://homahealthcarecenter.in/" />
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Homa Healthcare Center - Dr. Muddu Surendra Nehru MD | TSMC 20548 Certified Specialist" />
+    <meta property="og:description" content="TSMC 20548 Certified Healthcare in Hyderabad. Expert diabetes management, obesity treatment, and women's health services. 15+ years experience." />
+    <meta property="og:url" content="https://homahealthcarecenter.in/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_IN" />
+    <meta property="og:site_name" content="Homa Healthcare Center" />
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Homa Healthcare Center - TSMC 20548 Certified Healthcare" />
+    <meta name="twitter:description" content="Dr. Muddu Surendra Nehru MD - TSMC 20548 Certified Specialist. Diabetes, Obesity, Women's Health. Book: +91-9963721999" />
+    <meta name="twitter:site" content="@homahealthcarecenter" />
+    
+    <!-- Local Business Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "MedicalOrganization",
+      "name": "Homa Healthcare Center",
+      "description": "TSMC 20548 Certified Healthcare Center specializing in Diabetes, Obesity Treatment, and Women's Health",
+      "url": "https://homahealthcarecenter.in",
+      "telephone": "+91-9963721999",
+      "email": "homahealthcarecenter@gmail.com",
+      "sameAs": [
+        "https://www.youtube.com/@homahealthcarecenter",
+        "https://www.instagram.com/homahealthcarecenter"
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Hyderabad",
+        "addressRegion": "Telangana",
+        "addressCountry": "IN"
+      },
+      "medicalSpecialty": ["Diabetes Care", "Obesity Treatment", "Women's Health"],
+      "founder": {
+        "@type": "Person",
+        "name": "Dr. Muddu Surendra Nehru",
+        "jobTitle": "MD, TSMC 20548 Certified Specialist",
+        "email": "surendra.muddu@gmail.com"
+      }
+    }
+    </script>
+    
+    <title>Homa Healthcare Center - Dr. Muddu Surendra Nehru MD | TSMC 20548 Certified Specialist</title>
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SC4NMGHSB9"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      
+      gtag('config', 'G-SC4NMGHSB9', {
+        page_title: 'Homa Healthcare Center - Dr. Muddu Surendra Nehru MD',
+        page_location: window.location.href,
+        send_page_view: true,
+        anonymize_ip: false,
+        allow_google_signals: true,
+        allow_ad_personalization_signals: true
+      });
+      
+      // Track phone number clicks for local SEO
+      function trackPhoneClick() {
+        gtag('event', 'phone_click', {
+          event_category: 'contact',
+          event_label: 'phone_number_click',
+          value: 1,
+          send_to: 'G-SC4NMGHSB9'
+        });
+      }
+      
+      // Track appointment booking clicks
+      function trackAppointmentClick() {
+        gtag('event', 'appointment_click', {
+          event_category: 'conversion',
+          event_label: 'book_appointment',
+          value: 1,
+          send_to: 'G-SC4NMGHSB9'
+        });
+      }
+      
+      // Enhanced measurement events
+      gtag('event', 'page_view', {
+        page_title: 'Homa Healthcare Center',
+        page_location: window.location.href,
+        send_to: 'G-SC4NMGHSB9'
+      });
+    </script>
   </head>
   <body>
     <div id="root"></div>
