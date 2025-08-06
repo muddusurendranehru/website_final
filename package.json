@@ -3,11 +3,28 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "homepage": "https://homahealthcarecenter.in",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/YOUR_USERNAME/homa-healthcare-center.git"
+  },
+  "keywords": [
+    "healthcare",
+    "medical",
+    "patient-portal",
+    "telemedicine",
+    "react",
+    "typescript",
+    "tailwind"
+  ],
+  "author": "Dr. Muddu Surendra Nehru MD",
+  "description": "Professional healthcare management system and patient portal for Homa Healthcare Center",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "deploy": "npm run build && echo 'Build complete - ready for deployment'"
   },
   "dependencies": {
     "lucide-react": "^0.344.0",
