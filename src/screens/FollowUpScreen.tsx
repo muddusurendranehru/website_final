@@ -262,7 +262,7 @@ const FollowUpScreen: React.FC = () => {
               </div>
               <div className="flex items-center space-x-2">
                 <Stethoscope className="h-4 w-4 text-blue-600" />
-                <span className="text-sm text-gray-600">Dr. Surendra Nehru - APCOG Certified</span>
+                <span className="text-sm text-gray-600">Dr. Surendra Nehru - TSMC 20548 Certified</span>
               </div>
             </div>
           </div>

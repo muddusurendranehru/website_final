@@ -127,7 +127,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ onNavigate }) => {
               </div>
               <div className="bg-white bg-opacity-20 rounded-lg p-6 backdrop-blur-sm">
                 <Award className="h-8 w-8 mb-3 mx-auto" />
-                <h3 className="font-semibold mb-2">APCOG Certified</h3>
+                <h3 className="font-semibold mb-2">TSMC 20548 Certified</h3>
                 <p className="text-sm text-blue-100">Professional excellence</p>
               </div>
               <div className="bg-white bg-opacity-20 rounded-lg p-6 backdrop-blur-sm">

@@ -28,7 +28,7 @@ const WebsiteScreen: React.FC = () => {
     {
       icon: Shield,
       title: 'TSMC 20548',
-      description:  'TSMC 20548 Certified Medical Professional'
+      description: 'TSMC 20548 Certified Medical Professional'
     },
     {
       icon: Users,
