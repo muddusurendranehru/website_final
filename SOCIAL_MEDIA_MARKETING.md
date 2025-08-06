@@ -8,7 +8,7 @@
 
 I'm thrilled to announce the launch of our comprehensive healthcare platform at https://homahealthcarecenter.in
 
-As a TSMC 20548 certified healthcare professional with 15+ years of experience, I've always believed in making quality healthcare accessible to everyone. Today, we're taking a giant leap forward with our new digital platform.
+As an APCOG certified healthcare professional with 15+ years of experience, I've always believed in making quality healthcare accessible to everyone. Today, we're taking a giant leap forward with our new digital platform.
 
 🌟 What makes this special:
 ✅ 24/7 online appointment booking
@@ -21,7 +21,7 @@ As a TSMC 20548 certified healthcare professional with 15+ years of experience, 
 📊 The numbers speak for themselves:
 • 5000+ patients already trust our care
 • 15+ years of clinical excellence
-• TSMC 20548 certification for quality assurance
+• APCOG certification for quality assurance
 • 24/7 emergency support at +91-9963721999
 
 This isn't just a website - it's a complete healthcare ecosystem designed with our patients' needs at the center. From diabetes management to women's health, from obesity treatment to preventive care, everything is now just a click away.
@@ -32,12 +32,12 @@ This isn't just a website - it's a complete healthcare ecosystem designed with o
 
 Visit https://homahealthcarecenter.in and experience the future of healthcare today!
 
-#DigitalHealth #Healthcare #PatientCare #Innovation #Telemedicine #Hyderabad #HealthTech #TSMC20548
+#DigitalHealth #Healthcare #PatientCare #Innovation #Telemedicine #Hyderabad #HealthTech #APCOG
 
 ---
 
 Dr. Muddu Surendra Nehru MD
-TSMC 20548 Certified Healthcare Professional
+APCOG Certified Healthcare Professional
 📞 Emergency: +91-9963721999
 🌐 homahealthcarecenter.in
 ```
@@ -86,7 +86,7 @@ Experience the future of healthcare: https://homahealthcarecenter.in
 
 #HealthcareInnovation #DigitalTransformation #PatientExperience #HealthTech #MedicalTechnology #Telemedicine #ReactJS #WebDevelopment
 
-Dr. Muddu Surendra Nehru MD | TSMC 20548 Certified
+Dr. Muddu Surendra Nehru MD | APCOG Certified
 Emergency: +91-9963721999 | homahealthcarecenter.in
 ```
 
@@ -108,7 +108,7 @@ Homa Healthcare Center is now available 24/7 at your fingertips! 📱
 ✅ Secure online payments - no cash hassles
 ✅ Emergency support always available
 
-👨‍⚕️ Dr. Muddu Surendra Nehru MD (TSMC 20548 Certified) brings 15+ years of expertise directly to your phone!
+👨‍⚕️ Dr. Muddu Surendra Nehru MD (APCOG Certified) brings 15+ years of expertise directly to your phone!
 
 🎯 Perfect for:
 • Busy professionals who need flexible healthcare
@@ -146,7 +146,7 @@ Meet Priya (name changed), a working mother from Gachibowli who struggled to man
 "Dr. Nehru's platform made healthcare fit into my life, not the other way around!" - Priya
 
 🏥 This is what modern healthcare looks like:
-• TSMC 20548 certified quality care
+• APCOG certified quality care
 • 15+ years of medical expertise
 • 5000+ patients already benefiting
 • Available 24/7 on any device
@@ -178,7 +178,7 @@ From traditional appointments to 24/7 digital care - we've revolutionized your h
 📱 Slide 5: Call-to-action
 
 🌟 Why 5000+ patients choose us:
-• TSMC 20548 certified excellence
+• APCOG certified excellence
 • 15+ years trusted experience
 • 24/7 emergency support
 • AI-powered health guidance
@@ -188,7 +188,7 @@ Ready to upgrade your healthcare?
 👆 Link in bio: homahealthcarecenter.in
 📞 Emergency: +91-9963721999
 
-#HealthcareRevolution #DigitalHealth #HyderabadHealth #PatientCare #HealthTech #MedicalInnovation #HomaHealthcare #TSMC20548 #HealthcareApp #TelemedicineIndia
+#HealthcareRevolution #DigitalHealth #HyderabadHealth #PatientCare #HealthTech #MedicalInnovation #HomaHealthcare #APCOG #HealthcareApp #TelemedicineIndia
 ```
 
 ### **Instagram Post 2: Behind-the-Scenes**
@@ -246,7 +246,7 @@ Today, we launched the solution: https://homahealthcarecenter.in 🏥
 ✅ Secure payment processing
 ✅ Mobile-first design
 
-All backed by TSMC 20548 certification & 15+ years experience
+All backed by APCOG certification & 15+ years experience
 
 3/8 The technology stack:
 • React + TypeScript for reliability
@@ -282,7 +282,7 @@ Quality care is now available 24/7 at your fingertips.
 7/8 The numbers:
 🏥 5000+ patients served
 👨‍⚕️ 15+ years clinical experience
-🏆 TSMC 20548 certified
+🏆 APCOG certified
 📱 24/7 digital accessibility
 📞 Emergency support: +91-9963721999
 
@@ -293,7 +293,7 @@ Emergency: +91-9963721999
 
 RT if you believe healthcare should be this accessible! 🔄
 
-#DigitalHealth #HealthcareInnovation #Telemedicine #PatientCare #HealthTech #Hyderabad #TSMC20548
+#DigitalHealth #HealthcareInnovation #Telemedicine #PatientCare #HealthTech #Hyderabad #APCOG
 ```
 
 ### **Twitter Quick Posts**
@@ -316,7 +316,7 @@ Emergency: +91-9963721999
 💡 Healthcare accessibility solved:
 • No more appointment waits
 • 24/7 expert guidance available
-• TSMC 20548 certified quality
+• APCOG certified quality
 • 5000+ patients already benefiting
 
 Try it: https://homahealthcarecenter.in
