@@ -27,8 +27,8 @@ const WebsiteScreen: React.FC = () => {
     },
     {
       icon: Shield,
-      title: 'APCOG Certified',
-      description: 'Certified by Andhra Pradesh Obstetrics & Gynecology Society'
+      title: 'TSMC 20548',
+      description:  'TSMC 20548 Certified Medical Professional'
     },
     {
       icon: Users,
