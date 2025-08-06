@@ -397,7 +397,7 @@ See the transformation: https://homahealthcarecenter.in
 
 ### **Hashtag Strategy**
 **Primary:** #HomaHealthcare #DigitalHealth #HyderabadHealth
-**Secondary:** #HealthTech #PatientCare #TSMC20548 #TelemedicineIndia
+**Secondary:** #HealthTech #PatientCare #APCOG #TelemedicineIndia
 **Trending:** #HealthcareInnovation #MedicalTechnology #PatientFirst
 
 ### **Posting Schedule**

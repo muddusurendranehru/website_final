@@ -21,7 +21,7 @@ const Header: React.FC = () => {
           <div className="hidden md:flex items-center space-x-4">
             <div className="flex items-center space-x-2 bg-white bg-opacity-20 px-3 py-2 rounded-lg">
               <Shield className="h-4 w-4" />
-              <span className="text-sm font-medium">APCOG Certified</span>
+              <span className="text-sm font-medium">TSMC 20548 Certified</span>
             </div>
             
             <a
