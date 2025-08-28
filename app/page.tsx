@@ -8,11 +8,23 @@ import { AdBanner } from "@/components/ad-banner"
 import { NewsletterSignup } from "@/components/newsletter-signup"
 import { CTASection } from "@/components/cta-section"
 import Link from "next/link"
-import { Heart, Clock, Shield, Smartphone, Calendar, FileText, Video, Activity, Bot, Star } from "lucide-react"
+import {
+  Heart,
+  Clock,
+  Shield,
+  Smartphone,
+  Calendar,
+  FileText,
+  Video,
+  Activity,
+  Bot,
+  Star,
+  CreditCard,
+} from "lucide-react"
 
 export default function HomePage() {
-  const handleBookAppointment = () => {
-    window.open("https://v0-connect-to-supabase-green.vercel.app/", "_blank")
+  const handlePaymentNow = () => {
+    window.open("https://homa-payment-final-surendramuddu.replit.app/", "_blank")
   }
 
   return (
@@ -41,9 +53,9 @@ export default function HomePage() {
               <Button
                 size="lg"
                 className="bg-white text-primary hover:bg-white/90 font-semibold"
-                onClick={handleBookAppointment}
+                onClick={handlePaymentNow}
               >
-                📅 BOOK APPOINTMENT NOW
+                💳 PAYMENT NOW
               </Button>
               <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10 bg-transparent">
                 🚨 Emergency Contact
@@ -215,9 +227,16 @@ export default function HomePage() {
                 <div className="bg-green-100 w-16 h-16 rounded-lg flex items-center justify-center mx-auto mb-4">
                   <Shield className="h-8 w-8 text-green-600" />
                 </div>
-                <CardTitle className="text-xl mb-3">Preventive Care</CardTitle>
-                <CardDescription className="mb-4">Regular health screenings and preventive medicine</CardDescription>
-                <Button className="bg-green-600 hover:bg-green-700 text-white">Learn More →</Button>
+                <CardTitle className="text-xl mb-3">HOMA-IQ-SCORE</CardTitle>
+                <CardDescription className="mb-4">
+                  Check your C.O.D-H.O.M.A.-I.Q.score-cardio obesity diabetes-insulin resistance/TYG INDEX score
+                </CardDescription>
+                <Button
+                  className="bg-green-600 hover:bg-green-700 text-white"
+                  onClick={() => window.open("https://superlative-jalebi-49e1ba.netlify.app/", "_blank")}
+                >
+                  Learn More →
+                </Button>
               </Card>
 
               <Card className="text-center p-8 hover:shadow-lg transition-shadow">
@@ -264,16 +283,17 @@ export default function HomePage() {
               <Card className="hover:shadow-lg transition-shadow">
                 <CardHeader>
                   <div className="flex items-center space-x-2">
-                    <Calendar className="h-6 w-6 text-secondary" />
-                    <CardTitle>Appointment Scheduler</CardTitle>
+                    <CreditCard className="h-6 w-6 text-secondary" />
+                    <CardTitle>Payment Now</CardTitle>
                   </div>
                 </CardHeader>
                 <CardContent>
                   <CardDescription className="mb-4">
-                    Book and manage your healthcare appointments with ease and flexibility.
+                    Subscribe to our premium healthcare services and payment plans. Secure payment processing for all
+                    medical services.
                   </CardDescription>
-                  <Button asChild className="w-full bg-blue-600 hover:bg-blue-700 text-white">
-                    <Link href="/apps/appointments">Book Appointment</Link>
+                  <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white" onClick={handlePaymentNow}>
+                    Payment Now
                   </Button>
                 </CardContent>
               </Card>
@@ -510,7 +530,8 @@ export default function HomePage() {
           <div className="container mx-auto text-center max-w-4xl">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Ready to Get Started?</h2>
             <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-              Book your appointment today and experience professional healthcare that puts you first.
+              Subscribe to our premium healthcare services today and experience professional care with convenient
+              payment options.
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-2xl mx-auto">
@@ -522,13 +543,13 @@ export default function HomePage() {
               </div>
 
               <div className="text-left md:text-right">
-                <h3 className="font-semibold mb-4">Book Your Appointment</h3>
+                <h3 className="font-semibold mb-4">Subscribe & Pay Now</h3>
                 <Button
                   size="lg"
                   className="bg-white text-primary hover:bg-white/90 w-full md:w-auto"
-                  onClick={handleBookAppointment}
+                  onClick={handlePaymentNow}
                 >
-                  📅 Book Now
+                  💳 Payment Now
                 </Button>
                 <Button variant="link" className="text-white hover:text-white/80 block mt-2">
                   Visit Our Website →
