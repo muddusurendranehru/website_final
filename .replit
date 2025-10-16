@@ -1,33 +1,35 @@
-run = "npm run dev"
-entrypoint = "app/page.tsx"
-hidden = [".config", "tsconfig.json", "tsconfig.tsbuildinfo", "next-env.d.ts", ".next", ".swc"]
-
-[gitHubImport]
-requiredFiles = [".replit", "replit.nix"]
+modules = ["nodejs-20", "web", "python-3.11"]
+[agent]
+expertMode = true
+integrations = ["github:1.0.0"]
 
 [nix]
-channel = "stable-23_11"
+channel = "stable-25_05"
 
-[env]
-PATH = "/home/runner/$REPL_SLUG/.config/npm/node_global/bin:/home/runner/$REPL_SLUG/node_modules/.bin"
-npm_config_prefix = "/home/runner/$REPL_SLUG/.config/npm/node_global"
+[workflows]
+runButton = "Project"
 
-[packager]
-language = "nodejs"
+[[workflows.workflow]]
+name = "Project"
+mode = "parallel"
+author = "agent"
 
-[packager.features]
-packageSearch = true
-guessImports = true
-enabledForHosting = false
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Server"
 
-[languages.javascript]
-pattern = "**/{*.js,*.jsx,*.ts,*.tsx}"
+[[workflows.workflow]]
+name = "Server"
+author = "agent"
 
-[languages.javascript.languageServer]
-start = "typescript-language-server --stdio"
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm run dev"
+waitForPort = 5000
 
-[deployment]
-run = ["sh", "-c", "npm run start"]
-deploymentTarget = "cloudrun"
-ignorePorts = false
+[workflows.workflow.metadata]
+outputType = "webview"
 
+[[ports]]
+localPort = 5000
+externalPort = 80
