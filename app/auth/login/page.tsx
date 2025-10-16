@@ -31,7 +31,7 @@ export default function LoginPage() {
         localStorage.setItem('token', data.token)
         localStorage.setItem('user', JSON.stringify(data.user))
         
-        // Redirect to homepage
+        // Redirect to homepage (your live site)
         alert('✅ Login successful! Welcome to Homa Healthcare Center')
         window.location.href = '/'
       } else {
