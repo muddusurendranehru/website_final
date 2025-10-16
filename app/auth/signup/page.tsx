@@ -2,50 +2,100 @@
 import { useState } from 'react'
 
 export default function SignupPage() {
-  const [name, setName] = useState('')
-  const [phone, setPhone] = useState('')
+  const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
+  const [error, setError] = useState('')
+  const [loading, setLoading] = useState(false)
 
   const handleSignup = async (e) => {
     e.preventDefault()
+    setError('')
+    setLoading(true)
     
     if (password !== confirmPassword) {
-      alert('Passwords do not match')
+      setError('Passwords do not match')
+      setLoading(false)
       return
     }
     
-    const res = await fetch('https://xecrcdsfpvwczbnswyyl.supabase.co/rest/v1/our_customers', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhlY3JjZHNmcHZ3Y3pibnN3eXlsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTg4MTk1OTIsImV4cCI6MjA3NDM5NTU5Mn0.D_x3sPUY_B4qbhfRJZp-Nu8812niC-w2uHUhcmryOOs'
-      },
-      body: JSON.stringify({
-        name: name,
-        phone: phone,
-        email: phone + '@customer.local',
-        password: password
+    try {
+      const res = await fetch('/api/auth/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email,
+          password,
+          confirmPassword
+        })
       })
-    })
-    
-    if (res.ok) {
-      alert('Signup successful! Please login.')
-      window.location.href = '/auth/login'
-    } else {
-      alert('Signup failed - phone may already exist')
+      
+      const data = await res.json()
+      
+      if (res.ok) {
+        alert('✅ Account created successfully! Please login.')
+        window.location.href = '/auth/login'
+      } else {
+        setError(data.error || 'Signup failed')
+      }
+    } catch (err) {
+      setError('Network error. Please try again.')
+    } finally {
+      setLoading(false)
     }
   }
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-600 to-teal-600">
       <form onSubmit={handleSignup} className="bg-white p-8 rounded-lg shadow-xl w-96">
-        <h1 className="text-2xl font-bold mb-6">Sign Up</h1>
-        <input type="text" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} className="w-full p-3 mb-4 border rounded" required />
-        <input type="tel" placeholder="Phone" value={phone} onChange={(e) => setPhone(e.target.value)} className="w-full p-3 mb-4 border rounded" required />
-        <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} className="w-full p-3 mb-4 border rounded" required />
-        <input type="password" placeholder="Confirm Password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} className="w-full p-3 mb-4 border rounded" required />
-        <button type="submit" className="w-full p-3 bg-purple-600 text-white rounded">Sign Up</button>
+        <h1 className="text-2xl font-bold mb-6 text-center">Create Account</h1>
+        <p className="text-sm text-gray-600 mb-6 text-center">Join Homa Healthcare Center</p>
+        
+        {error && (
+          <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">
+            {error}
+          </div>
+        )}
+        
+        <input 
+          type="email" 
+          placeholder="Email Address" 
+          value={email} 
+          onChange={(e) => setEmail(e.target.value)} 
+          className="w-full p-3 mb-4 border rounded focus:outline-none focus:ring-2 focus:ring-purple-600" 
+          required 
+        />
+        <input 
+          type="password" 
+          placeholder="Password (min 6 characters)" 
+          value={password} 
+          onChange={(e) => setPassword(e.target.value)} 
+          className="w-full p-3 mb-4 border rounded focus:outline-none focus:ring-2 focus:ring-purple-600" 
+          required 
+          minLength={6}
+        />
+        <input 
+          type="password" 
+          placeholder="Confirm Password" 
+          value={confirmPassword} 
+          onChange={(e) => setConfirmPassword(e.target.value)} 
+          className="w-full p-3 mb-4 border rounded focus:outline-none focus:ring-2 focus:ring-purple-600" 
+          required 
+        />
+        <button 
+          type="submit" 
+          disabled={loading}
+          className="w-full p-3 bg-purple-600 text-white rounded hover:bg-purple-700 disabled:bg-gray-400 disabled:cursor-not-allowed"
+        >
+          {loading ? 'Creating Account...' : 'Sign Up'}
+        </button>
+        
+        <p className="mt-4 text-center text-sm text-gray-600">
+          Already have an account?{' '}
+          <a href="/auth/login" className="text-purple-600 hover:underline">Login</a>
+        </p>
       </form>
     </div>
   )

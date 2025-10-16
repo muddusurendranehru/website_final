@@ -2,25 +2,45 @@
 import { useState } from 'react'
 
 export default function LoginPage() {
-  const [phone, setPhone] = useState('')
+  const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [error, setError] = useState('')
+  const [loading, setLoading] = useState(false)
 
   const handleLogin = async (e) => {
     e.preventDefault()
+    setError('')
+    setLoading(true)
     
-    const res = await fetch(`https://xecrcdsfpvwczbnswyyl.supabase.co/rest/v1/our_customers?phone=eq.${phone}&password=eq.${password}`, {
-      headers: {
-        'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhlY3JjZHNmcHZ3Y3pibnN3eXlsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTg4MTk1OTIsImV4cCI6MjA3NDM5NTU5Mn0.D_x3sPUY_B4qbhfRJZp-Nu8812niC-w2uHUhcmryOOs'
+    try {
+      const res = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email,
+          password
+        })
+      })
+      
+      const data = await res.json()
+      
+      if (res.ok) {
+        // Store user data and token
+        localStorage.setItem('token', data.token)
+        localStorage.setItem('user', JSON.stringify(data.user))
+        
+        // Redirect to homepage
+        alert('✅ Login successful! Welcome to Homa Healthcare Center')
+        window.location.href = '/'
+      } else {
+        setError(data.error || 'Invalid credentials')
       }
-    })
-    
-    const data = await res.json()
-    if (data.length > 0) {
-      localStorage.setItem('user', JSON.stringify(data[0]))
-      // Stay on same website, just go to home
-      window.location.href = '/'
-    } else {
-      alert('Invalid credentials')
+    } catch (err) {
+      setError('Network error. Please try again.')
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -28,12 +48,20 @@ export default function LoginPage() {
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-600 to-teal-600">
       <form onSubmit={handleLogin} className="bg-white p-8 rounded-lg shadow-xl w-96">
         <h1 className="text-2xl font-bold mb-6 text-center">Homa Healthcare Login</h1>
+        <p className="text-sm text-gray-600 mb-6 text-center">Welcome back! Please login to continue.</p>
+        
+        {error && (
+          <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">
+            {error}
+          </div>
+        )}
+        
         <input
-          type="tel"
-          placeholder="Phone Number"
-          value={phone}
-          onChange={(e) => setPhone(e.target.value)}
-          className="w-full p-3 mb-4 border rounded"
+          type="email"
+          placeholder="Email Address"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          className="w-full p-3 mb-4 border rounded focus:outline-none focus:ring-2 focus:ring-purple-600"
           required
         />
         <input
@@ -41,12 +69,21 @@ export default function LoginPage() {
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className="w-full p-3 mb-4 border rounded"
+          className="w-full p-3 mb-4 border rounded focus:outline-none focus:ring-2 focus:ring-purple-600"
           required
         />
-        <button type="submit" className="w-full p-3 bg-purple-600 text-white rounded hover:bg-purple-700">
-          Sign In
+        <button 
+          type="submit" 
+          disabled={loading}
+          className="w-full p-3 bg-purple-600 text-white rounded hover:bg-purple-700 disabled:bg-gray-400 disabled:cursor-not-allowed"
+        >
+          {loading ? 'Logging in...' : 'Sign In'}
         </button>
+        
+        <p className="mt-4 text-center text-sm text-gray-600">
+          Don't have an account?{' '}
+          <a href="/auth/signup" className="text-purple-600 hover:underline">Sign Up</a>
+        </p>
       </form>
     </div>
   )
